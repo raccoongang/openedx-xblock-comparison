@@ -1,0 +1,160 @@
+{% load i18n %}
+{% load l10n %}
+
+<script type="text/template" id="js-questions-tpl">
+  <% _.each(questions, function(question, index) { %>
+    <li class="field comp-setting-entry metadata_entry">
+      <label class="label setting-label item-label" for="question<%- question.uid %>"><%- index+1 %>.</label>
+      <input type="text"
+             class="field-data-control item-text js-question-text"
+             id="question<%- question.uid %>"
+             data-uid="<%- question.uid %>"
+             value="<%- gettext(question.text) %>"
+      />
+      <button type="button" class="btn-remove js-remove-question" title="{% trans 'Remove question' %}" data-uid="<%- question.uid %>">
+        <span class="icon remove" aria-hidden="true"></span>
+      </button>
+    </li>
+  <% }); %>
+</script>
+
+<script type="text/template" id="js-answers-tpl">
+  <% _.each(answers, function(answer, index) { %>
+    <li class="field comp-setting-entry metadata_entry">
+      <label class="label setting-label item-label" for="answers<%- answer.uid %>"><%- upperCaseAlp[index] %>.</label>
+      <input type="text"
+             class="field-data-control item-text js-answer-text"
+             id="answers<%- answer.uid %>"
+             data-uid="<%- answer.uid %>"
+             value="<%- gettext(answer.text) %>"
+      />
+      <button type="button" class="btn-remove js-remove-answer" title="{% trans 'Remove answer' %}" data-uid="<%- answer.uid %>">
+        <span class="icon remove" aria-hidden="true"></span>
+      </button>
+      <div class="row">
+        <fieldset>
+          <legend class="h4">{% trans 'Questions' %}</legend>
+          <% _.each(questions, function(question, index) { %>
+          <div class="questions-row">
+            <label class="checkbox-label">
+              <input type="checkbox"
+                     name="related-answer-<%- answer.uid %>"
+                     value="<%- question.uid %>"
+                     class="question-checkbox"
+                     data-answer-uid="<%- answer.uid %>"
+                     <% if (question.uid === answer.question_uid) { %>checked="checked"<% } %>
+              />
+              <%- index+1 %>. <%- gettext(question.text) %>
+            </label>
+          </div>
+          <% }); %>
+        </fieldset>
+      </div>
+    </li>
+  <% }); %>
+</script>
+
+
+<div class="editor-with-buttons comparison_studio_edit_block">
+  <div class="wrapper-comp-settings is-active editor-with-buttons" id="settings-tab">
+    <section class="tab questions-tab">
+      <ul class="list-input settings-list">
+        <li class="field comp-setting-entry metadata_entry">
+          <div class="wrapper-comp-setting">
+            <label class="label setting-label" for="xb-field-edit-display-name">
+                {% trans fields.display_name.display_name %}
+            </label>
+            <input
+              type="text"
+              class="field-data-control"
+              id="xb-field-edit-display-name"
+              value="{% trans self.display_name %}"
+            >
+          </div>
+          <span class="tip setting-help">{% trans fields.display_name.help %}</span>
+        </li>
+        <li class="field comp-setting-entry metadata_entry">
+          <div class="wrapper-comp-setting">
+            <label class="label setting-label" for="xb-field-edit-title">
+                {% trans fields.title.display_name %}
+            </label>
+            <input
+              type="text"
+              class="field-data-control"
+              id="xb-field-edit-title"
+              value="{{ self.title }}"
+            >
+          </div>
+          <span class="tip setting-help">{% trans  fields.title.help %}</span>
+        </li>
+        <li class="field comp-setting-entry metadata_entry">
+          <div class="wrapper-comp-setting">
+            <label class="label setting-label" for="xb-field-edit-weight">
+                {% trans fields.weight.display_name %}
+            </label>
+            <input
+              type="number"
+              class="field-data-control"
+              id="xb-field-edit-weight"
+              step="0.1"
+              value="{{ self.weight|unlocalize }}"
+            >
+          </div>
+          <span class="tip setting-help">{% trans fields.weight.help %}</span>
+        </li>
+        <li class="field comp-setting-entry metadata_entry">
+          <div class="wrapper-comp-setting">
+            <label class="label setting-label" for="xb-field-edit-display-option">
+                {% trans fields.display_option.display_name %}
+            </label>
+            <select
+              class="field-data-control"
+              id="xb-field-edit-display-option"
+            >
+              {% for option in fields.display_option.values %}
+                <option value="{{option.value}}" {% if self.display_option == option.value %}selected{% endif %}>
+                  {% trans option.display_name %}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        </li>
+        <li class="field comp-setting-entry metadata_entry block-questions">
+          <p>{% trans "Questions" %}</p>
+          <ul class="js-block-questions">
+          </ul>
+          <button class="button-add js-add-question">
+            <span class="icon add" aria-hidden="true"></span>
+            {% trans "Add a question" %}
+          </button>
+        </li>
+      </ul>
+    </section>
+    <section class="tab answers-tab hidden">
+      <ul class="list-input settings-list">
+        <li class="field comp-setting-entry metadata_entry block-answers">
+          <p>{% trans "Answers" %}</p>
+          <ul class="js-block-answers">
+          </ul>
+          <button class="button-add js-add-answer">
+            <span class="icon add" aria-hidden="true"></span>
+            {% trans "Add answer" %}
+          </button>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <div class="xblock-actions">
+    <ul>
+      <li class="action-item">
+        <a href="#" class="button action-primary save-button hidden">{% trans "Save" %}</a>
+      </li>
+      <li class="action-item">
+        <a href="#" class="button action-primary continue-button">{% trans "Continue" %}</a>
+      </li>
+      <li class="action-item">
+        <a href="#" class="button cancel-button">{% trans "Cancel" %}</a>
+      </li>
+    </ul>
+  </div>
+</div>
