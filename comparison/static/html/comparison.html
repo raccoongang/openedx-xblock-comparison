@@ -1,0 +1,93 @@
+{% load i18n %}
+
+<div class="comparison_block">
+  {% if xblock.title %}
+  <h2>{{ xblock.title }}</h2>
+  {% endif %}
+
+  {% if xblock.display_option == xblock.DISPLAY_OPTION_MIN %}
+  <div class="dropdown display-option-min">
+    <div class="dropdown-list dropdown-list_questions">
+      {% for question in questions %}
+      <div class="dropdown-row">
+        <span class="dropdown--item_question">
+          <span>{{ forloop.counter }}.</span>
+          {% trans question.text %}
+        </span>
+        <span class="dropdown--item dropdown--item_blank question-uid-{{ question.uid }}" data-question-uid="{{ question.uid }}"></span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="dropdown-list dropdown-list_answers">
+      {% for answer in answers %}
+      <div class="dropdown-row">
+        <span class="dropdown--item js-answer answer-uid-{{ answer.uid }}" data-answer-uid="{{ answer.uid }}">
+          <span class="js-alp"></span>
+          {% trans answer.text %}
+          <button class="dropdown--close js-remove-answer"></button>
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% elif xblock.display_option == xblock.DISPLAY_OPTION_MIDDLE %}
+  <div class="dropdown display-option-middle">
+    <div class="dropdown-list dropdown-list_questions">
+      {% for question in questions %}
+      <div class="dropdown-row">
+        <span class="dropdown--item_question">
+          <span>{{ forloop.counter }}.</span>
+          {% trans question.text %}
+        </span>
+        <span class="dropdown--item dropdown--item_blank question-uid-{{ question.uid }}" data-question-uid="{{ question.uid }}"></span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="dropdown-list dropdown-list_answers">
+      {% for answer in answers %}
+      <div class="dropdown-row">
+        <span class="dropdown--item js-answer answer-uid-{{ answer.uid }}" data-answer-uid="{{ answer.uid }}">
+          <span class="js-alp"></span>
+          {% trans answer.text %}
+          <button class="dropdown--close js-remove-answer"></button>
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="dropdown display-option-max">
+    <div class="dropdown-list dropdown-list_answers">
+      {% for answer in answers %}
+      <div class="dropdown-row">
+        <span class="dropdown--item js-answer answer-uid-{{ answer.uid }}" data-answer-uid="{{ answer.uid }}">
+          <span class="js-alp"></span>
+          {% trans answer.text %}
+          <button class="dropdown--close js-remove-answer"></button>
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="dropdown-list dropdown-list_questions">
+      {% for question in questions %}
+      <div class="dropdown-row">
+        <span class="dropdown--item_question">
+          <span>{{ forloop.counter }}.</span>
+          {% trans question.text %}
+        </span>
+        <span class="dropdown--item dropdown--item_blank question-uid-{{ question.uid }}" data-question-uid="{{ question.uid }}"></span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="submit-attempt-container">
+    <button type="button" class="submit btn-brand" data-submitting="{% trans 'Submitting' %}" data-value="{% trans 'Submit' %}" disabled="disabled">
+      <span class="submit-label">{% trans "Submit" %}</span>
+    </button>
+  </div>
+  <div class="notification">
+    <span class="js-notification-message"></span>
+  </div>
+</div>

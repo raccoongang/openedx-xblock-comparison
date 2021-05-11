@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-26 12:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: comparison/comparison.py:30
+msgid "Display Name"
+msgstr ""
+
+#: comparison/comparison.py:31
+msgid "The display name for this comparison problem."
+msgstr ""
+
+#: comparison/comparison.py:33
+msgid "Comparison"
+msgstr ""
+
+#: comparison/comparison.py:36
+msgid "Title"
+msgstr ""
+
+#: comparison/comparison.py:37
+msgid ""
+"The title of the comparison problem. The title is displayed to learners."
+msgstr ""
+
+#: comparison/comparison.py:42
+msgid "Problem Weight"
+msgstr ""
+
+#: comparison/comparison.py:43
+msgid "Defines the number of points the problem is worth."
+msgstr ""
+
+#: comparison/comparison.py:48
+msgid "Display Option"
+msgstr ""
+
+#: comparison/comparison.py:51
+msgid "min"
+msgstr ""
+
+#: comparison/comparison.py:52
+msgid "middle"
+msgstr ""
+
+#: comparison/comparison.py:53
+msgid "max"
+msgstr ""
+
+#: comparison/comparison.py:58
+msgid "Problem data"
+msgstr ""
+
+#: comparison/comparison.py:60
+msgid ""
+"Information about questions and answers for this problem. This information "
+"is derived from the input that a course author provides via the interactive "
+"editor when configuring the problem."
+msgstr ""
+
+#: comparison/comparison.py:79
+msgid "Number of attempts learner used"
+msgstr ""
+
+#: comparison/comparison.py:190
+msgid "Submission deadline has passed."
+msgstr ""
+
+#: comparison/default_data.py:9
+msgid "question 1"
+msgstr ""
+
+#: comparison/default_data.py:13
+msgid "question 2"
+msgstr ""
+
+#: comparison/default_data.py:17
+msgid "question 3"
+msgstr ""
+
+#: comparison/default_data.py:21
+msgid "question 4"
+msgstr ""
+
+#: comparison/default_data.py:27
+msgid "answer 1"
+msgstr ""
+
+#: comparison/default_data.py:32
+msgid "answer 2"
+msgstr ""
+
+#: comparison/default_data.py:37
+msgid "answer 3"
+msgstr ""
+
+#: comparison/default_data.py:42
+msgid "answer 4"
+msgstr ""
+
+#: comparison/default_data.py:47
+msgid "answer 5"
+msgstr ""
+
+#: comparison/default_data.py:52
+msgid "answer 6"
+msgstr ""
+
+#: comparison/static/html/comparison.html:86
+msgid "Submitting"
+msgstr ""
+
+#: comparison/static/html/comparison.html:86
+#: comparison/static/html/comparison.html:87
+msgid "Submit"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:13
+msgid "Remove question"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:29
+msgid "Remove answer"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:34
+#: comparison/static/html/studio_edit.html:121
+msgid "Questions"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:126
+msgid "Add a question"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:134
+msgid "Answers"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:139
+msgid "Add answer"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:148
+msgid "Save"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:151
+msgid "Continue"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:154
+msgid "Cancel"
+msgstr ""
