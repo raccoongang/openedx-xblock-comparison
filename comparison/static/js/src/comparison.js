@@ -1,15 +1,17 @@
 /* Javascript for ComparisonXBlock. */
 function ComparisonXBlock(runtime, element, params) {
-  const upperCaseAlp = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let handlerSubmitUrl = runtime.handlerUrl(element, 'submit_problem'),
-      userAnswers = params.answers,
-      isPastDue = params.has_deadline_passed,
-      $answers = $('.js-answer', element),
-      $dropdownItemBlank = $('.dropdown--item_blank', element),
-      $submitButton = $('.submit', element),
-      $submitLabel = $('.submit-label', element),
-      $notificationMessage = $('.js-notification-message', element),
-      gettext;
+  const currentLanguage = $('html').attr('lang');
+  let upperCaseAlp = currentLanguage === 'uk' ? 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    handlerSubmitUrl = runtime.handlerUrl(element, 'submit_problem'),
+    userAnswers = params.answers,
+    isPastDue = params.has_deadline_passed,
+    $answers = $('.js-answer', element),
+    $dropdownItemBlank = $('.dropdown--item_blank', element),
+    $submitButton = $('.submit', element),
+    $submitLabel = $('.submit-label', element),
+    $notification = $('.notification'),
+    $notificationMessage = $('.js-notification-message', element),
+    gettext;
 
   if ('СomparisonXBlockI18N' in window) {
     // Use Сomparison's local translations
@@ -26,37 +28,43 @@ function ComparisonXBlock(runtime, element, params) {
   let render = function() {
      _.each($('.js-alp', element), function(el, index) {
       $(el).text(`${upperCaseAlp[index]}.`)
-    })
+    });
 
     _.each(userAnswers, function(userAnswer) {
       let $answer = $(`.dropdown-list_answers .answer-uid-${userAnswer.answer_uid}`, element),
           $question = $(`.dropdown--item_blank.question-uid-${userAnswer.question_uid}`, element);
       dropdownAnswer($answer, $question);
     })
-  }
+  };
 
   let dropdownAnswer = function($selectedAnswer, $question) {
-    $selectedAnswer.removeClass('selected-answer')
+    $selectedAnswer.removeClass('selected-answer');
     let $cloneSelectedAnswer = $selectedAnswer.clone();
     $selectedAnswer.addClass('dropdown-answer');
     $question.html($cloneSelectedAnswer);
     checkAvailabilitySubmit();
-  }
+  };
 
   let removeAnswer = function($answer) {
     let answerUid = $answer.data('answer-uid');
     $(`.dropdown-list_answers .answer-uid-${answerUid}`, element).removeClass('dropdown-answer');
     $answer.remove();
-  }
+  };
 
   let checkAvailabilitySubmit = function() {
     let $answers = $('.dropdown-list_questions .js-answer', element);
     $submitButton.attr('disabled', isPastDue || $dropdownItemBlank.length !== $answers.length);
-  }
+  };
 
-  let clearMessage = function() {
+  let showMessage = function() {
+    $notification.removeClass('is-hidden');
+    $notificationMessage.text(gettext('Your response has been sent successfully.'));
+  };
+
+  let hideMessage = function() {
+    $notification.addClass('is-hidden');
     $notificationMessage.text('');
-  }
+  };
 
   render();
 
@@ -69,7 +77,7 @@ function ComparisonXBlock(runtime, element, params) {
     if (!hasClassSelectedAnswer) {
       $ev.addClass('selected-answer')
     }
-  })
+  });
 
   $dropdownItemBlank.on('click', function(ev) {
     let $question = $(ev.currentTarget),
@@ -82,12 +90,12 @@ function ComparisonXBlock(runtime, element, params) {
       }
       dropdownAnswer($selectedAnswer, $question)
     }
-  })
+  });
 
   $('.dropdown-list_questions', element).on('click', '.js-remove-answer', function(ev) {
     removeAnswer($(ev.currentTarget).parent('.js-answer'));
     checkAvailabilitySubmit();
-  })
+  });
 
   $submitButton.on('click', function() {
     let answers = [];
@@ -103,7 +111,7 @@ function ComparisonXBlock(runtime, element, params) {
         question_uid: questionUid,
         answer_uid: answerUid
       })
-    })
+    });
 
     $submitLabel.text($submitButton.data('submitting'));
 
@@ -114,8 +122,8 @@ function ComparisonXBlock(runtime, element, params) {
       dataType: 'json',
       success: function (response) {
         $submitLabel.text($submitButton.data('value'));
-        $notificationMessage.text(gettext('Your response has been sent successfully.'))
-        setTimeout(clearMessage, 5000);
+        showMessage();
+        setTimeout(hideMessage, 5000);
       }
     })
   })
