@@ -25,7 +25,7 @@ def package_data(pkg, roots):
 
 setup(
     name='comparison-xblock',
-    version='0.0.2',
+    version='0.0.3',
     description='XBlock which allows you to create comparison tests',
     packages=[
         'comparison',

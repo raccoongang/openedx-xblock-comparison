@@ -1,7 +1,7 @@
 /* Javascript for ComparisonXBlock. */
 function ComparisonXBlock(runtime, element, params) {
   const currentLanguage = $('html').attr('lang');
-  let upperCaseAlp = currentLanguage === 'uk' ? 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  let upperCaseAlp = currentLanguage === 'uk' ? 'АБВГДЕЖИКЛМНПРСТУФХЦШЩЮЯ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     handlerSubmitUrl = runtime.handlerUrl(element, 'submit_problem'),
     userAnswers = params.answers,
     isPastDue = params.has_deadline_passed,
