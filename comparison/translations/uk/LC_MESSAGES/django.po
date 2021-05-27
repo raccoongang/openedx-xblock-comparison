@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 12:52+0000\n"
+"POT-Creation-Date: 2021-05-26 21:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Number of attempts learner used"
 msgstr ""
 
-#: comparison/comparison.py:190
+#: comparison/comparison.py:193
 msgid "Submission deadline has passed."
 msgstr ""
 
@@ -130,43 +130,46 @@ msgid "Submitting"
 msgstr ""
 
 #: comparison/static/html/comparison.html:86
-#: comparison/static/html/comparison.html:87
 msgid "Submit"
 msgstr ""
 
-#: comparison/static/html/studio_edit.html:13
+#: comparison/static/html/comparison.html:87
+msgid "Submit answer"
+msgstr ""
+
+#: comparison/static/html/studio_edit.html:14
 msgid "Remove question"
 msgstr "Видалити завдання"
 
-#: comparison/static/html/studio_edit.html:29
+#: comparison/static/html/studio_edit.html:31
 msgid "Remove answer"
 msgstr "Видалити відповідь"
 
-#: comparison/static/html/studio_edit.html:34
-#: comparison/static/html/studio_edit.html:121
+#: comparison/static/html/studio_edit.html:36
+#: comparison/static/html/studio_edit.html:123
 msgid "Questions"
 msgstr "Завдання"
 
-#: comparison/static/html/studio_edit.html:126
+#: comparison/static/html/studio_edit.html:128
 msgid "Add a question"
 msgstr "Додати завдання"
 
-#: comparison/static/html/studio_edit.html:134
+#: comparison/static/html/studio_edit.html:136
 msgid "Answers"
 msgstr "Варіант відповіді на завдання"
 
-#: comparison/static/html/studio_edit.html:139
+#: comparison/static/html/studio_edit.html:141
 msgid "Add answer"
 msgstr "Додати відповідь"
 
-#: comparison/static/html/studio_edit.html:148
+#: comparison/static/html/studio_edit.html:150
 msgid "Save"
 msgstr "Зберегти"
 
-#: comparison/static/html/studio_edit.html:151
+#: comparison/static/html/studio_edit.html:153
 msgid "Continue"
 msgstr "Продовжити"
 
-#: comparison/static/html/studio_edit.html:154
+#: comparison/static/html/studio_edit.html:156
 msgid "Cancel"
 msgstr "Скасувати"
