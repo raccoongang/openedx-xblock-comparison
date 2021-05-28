@@ -131,7 +131,7 @@ msgstr ""
 
 #: comparison/static/html/comparison.html:86
 #: comparison/static/html/comparison.html:87
-msgid "Submit"
+msgid "Submit answer"
 msgstr ""
 
 #: comparison/static/html/studio_edit.html:13

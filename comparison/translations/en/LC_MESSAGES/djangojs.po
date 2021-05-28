@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 12:52+0000\n"
+"POT-Creation-Date: 2021-05-26 21:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: comparison/static/js/src/comparison.js:104
+#: comparison/static/js/src/comparison.js:61
 msgid "Your response has been sent successfully."
 msgstr ""
 
-#: comparison/static/js/src/studio_edit.js:63
-#: comparison/static/js/src/studio_edit.js:198
+#: comparison/static/js/src/studio_edit.js:64
+#: comparison/static/js/src/studio_edit.js:199
 msgid "There was an error with your form."
 msgstr ""
 
-#: comparison/static/js/src/studio_edit.js:64
+#: comparison/static/js/src/studio_edit.js:65
 msgid "Please check over your questions."
 msgstr ""
 
-#: comparison/static/js/src/studio_edit.js:199
+#: comparison/static/js/src/studio_edit.js:200
 msgid "Please check the settings for your answers."
 msgstr ""
 
-#: comparison/static/js/src/studio_edit.js:209
+#: comparison/static/js/src/studio_edit.js:210
 msgid "Saving"
 msgstr ""
 
-#: comparison/static/js/src/studio_edit.js:231
+#: comparison/static/js/src/studio_edit.js:232
 msgid ""
 "This may be happening because of an error with our server or your internet "
 "connection. Try refreshing the page or making sure you are online."
 msgstr ""
 
-#: comparison/static/js/src/studio_edit.js:245
+#: comparison/static/js/src/studio_edit.js:246
 msgid "Unable to update settings"
 msgstr ""

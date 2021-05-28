@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 12:52+0000\n"
+"POT-Creation-Date: 2021-05-26 21:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,28 +21,28 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: comparison/static/js/src/comparison.js:104
+#: comparison/static/js/src/comparison.js:61
 msgid "Your response has been sent successfully."
 msgstr "Ваша відповідь успішно надіслана."
 
-#: comparison/static/js/src/studio_edit.js:63
-#: comparison/static/js/src/studio_edit.js:198
+#: comparison/static/js/src/studio_edit.js:64
+#: comparison/static/js/src/studio_edit.js:199
 msgid "There was an error with your form."
 msgstr "Під час редагування сталася помилка."
 
-#: comparison/static/js/src/studio_edit.js:64
+#: comparison/static/js/src/studio_edit.js:65
 msgid "Please check over your questions."
 msgstr "Будь ласка, перевірте свої завдання."
 
-#: comparison/static/js/src/studio_edit.js:199
+#: comparison/static/js/src/studio_edit.js:200
 msgid "Please check the settings for your answers."
 msgstr "Будь ласка, перевірте налаштування своїх відповідей."
 
-#: comparison/static/js/src/studio_edit.js:209
+#: comparison/static/js/src/studio_edit.js:210
 msgid "Saving"
 msgstr "Збереження"
 
-#: comparison/static/js/src/studio_edit.js:231
+#: comparison/static/js/src/studio_edit.js:232
 msgid ""
 "This may be happening because of an error with our server or your internet "
 "connection. Try refreshing the page or making sure you are online."
@@ -50,7 +50,7 @@ msgstr ""
 "Це може статися через помилку з нашим сервером або вашим Інтернет-"
 "з'єднанням. Спробуйте оновити сторінку або переконайтеся, що ви в мережі."
 
-#: comparison/static/js/src/studio_edit.js:245
+#: comparison/static/js/src/studio_edit.js:246
 msgid "Unable to update settings"
 msgstr "Не вдається оновити налаштування"
 
