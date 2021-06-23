@@ -98,7 +98,8 @@ function ComparisonXBlock(runtime, element, params) {
   });
 
   $submitButton.on('click', function() {
-    let answers = [];
+    let answers = [],
+      that = this;
 
     if (isPastDue) {
       return
@@ -121,6 +122,7 @@ function ComparisonXBlock(runtime, element, params) {
       data: JSON.stringify({answers: answers}),
       dataType: 'json',
       success: function (response) {
+        that.setAttribute('disabled', 'true')
         $submitLabel.text($submitButton.data('value'));
         showMessage();
         setTimeout(hideMessage, 5000);
