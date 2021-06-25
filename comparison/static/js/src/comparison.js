@@ -114,8 +114,6 @@ function ComparisonXBlock(runtime, element, params) {
       })
     });
 
-    $submitLabel.text($submitButton.data('submitting'));
-
     $.ajax({
       type: 'POST',
       url: handlerSubmitUrl,
@@ -123,7 +121,6 @@ function ComparisonXBlock(runtime, element, params) {
       dataType: 'json',
       success: function (response) {
         that.setAttribute('disabled', 'true')
-        $submitLabel.text($submitButton.data('value'));
         showMessage();
         setTimeout(hideMessage, 5000);
       }
