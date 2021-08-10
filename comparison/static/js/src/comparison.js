@@ -1,6 +1,7 @@
 /* Javascript for ComparisonXBlock. */
 function ComparisonXBlock(runtime, element, params) {
-  const currentLanguage = $('html').attr('lang');
+  const ENTER_KEY_CODE = 13,
+    currentLanguage = $('html').attr('lang');
   let upperCaseAlp = currentLanguage === 'uk' ? 'АБВГДЕЖИКЛМНПРСТУФХЦШЩЮЯ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     handlerSubmitUrl = runtime.handlerUrl(element, 'submit_problem'),
     userAnswers = params.answers,
@@ -41,6 +42,7 @@ function ComparisonXBlock(runtime, element, params) {
     $selectedAnswer.removeClass('selected-answer');
     let $cloneSelectedAnswer = $selectedAnswer.clone();
     $selectedAnswer.addClass('dropdown-answer');
+    $cloneSelectedAnswer.removeAttr('tabindex');
     $question.html($cloneSelectedAnswer);
     checkAvailabilitySubmit();
   };
@@ -69,7 +71,11 @@ function ComparisonXBlock(runtime, element, params) {
   render();
 
   // mark the answer to the selected
-  $answers.on('click', function(ev) {
+  $answers.on('click keypress', function(ev) {
+    if (ev.type === 'keypress' && ev.which !== ENTER_KEY_CODE) {
+      return;
+    }
+
     let $ev = $(ev.currentTarget),
         hasClassSelectedAnswer = $(ev.currentTarget).hasClass('selected-answer');
     $answers.removeClass('selected-answer');
@@ -79,7 +85,11 @@ function ComparisonXBlock(runtime, element, params) {
     }
   });
 
-  $dropdownItemBlank.on('click', function(ev) {
+  $dropdownItemBlank.on('click keypress', function(ev) {
+    if (ev.type === 'keypress' && ev.which !== ENTER_KEY_CODE) {
+      return;
+    }
+
     let $question = $(ev.currentTarget),
         $answer = $question.children('.js-answer'),
         $selectedAnswer = $('.selected-answer', element);
