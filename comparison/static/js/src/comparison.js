@@ -4,7 +4,7 @@ function ComparisonXBlock(runtime, element, params) {
     currentLanguage = $('html').attr('lang');
   let upperCaseAlp = currentLanguage === 'uk' ? 'АБВГДЕЖИКЛМНПРСТУФХЦШЩЮЯ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     handlerSubmitUrl = runtime.handlerUrl(element, 'submit_problem'),
-    userAnswers = params.answers,
+    handlerAnswerUrl = runtime.handlerUrl(element, 'get_answer'),
     isPastDue = params.has_deadline_passed,
     $answers = $('.js-answer', element),
     $dropdownItemBlank = $('.dropdown--item_blank', element),
@@ -31,6 +31,20 @@ function ComparisonXBlock(runtime, element, params) {
       $(el).text(`${upperCaseAlp[index]}.`)
     });
 
+    $.ajax({
+      type: 'POST',
+      url: handlerAnswerUrl,
+      data: JSON.stringify({
+        requested: true
+      }),
+      dataType: 'json',
+      success: function(data) {
+        fillAnswers(data.answers);
+      }
+    });
+  };
+
+  const fillAnswers = function(userAnswers) {
     _.each(userAnswers, function(userAnswer) {
       let $answer = $(`.dropdown-list_answers .answer-uid-${userAnswer.answer_uid}`, element),
           $question = $(`.dropdown--item_blank.question-uid-${userAnswer.question_uid}`, element);
