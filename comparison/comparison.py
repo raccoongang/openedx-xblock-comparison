@@ -131,7 +131,7 @@ class ComparisonXBlock(XBlock):
         fragment.add_javascript(self.resource_string('static/js/src/comparison.js'))
         fragment.initialize_js(
             'ComparisonXBlock',
-            {'answers': self.user_answers, 'has_deadline_passed': self.has_submission_deadline_passed}
+            {'has_deadline_passed': self.has_submission_deadline_passed}
         )
         return fragment
 
@@ -215,6 +215,10 @@ class ComparisonXBlock(XBlock):
         return {
             'result': 'success'
         }
+
+    @XBlock.json_handler
+    def get_answer(self, *args, **kwargs):
+        return {'answers': self.user_answers}
 
     def publish_grade(self, score):
         self.runtime.publish(
