@@ -114,6 +114,7 @@ class ComparisonXBlock(XBlock):
             'xblock': self,
             'questions': questions,
             'answers': answers,
+            'attempts_used': self.attempts,
         })
 
         fragment = Fragment()
@@ -213,7 +214,8 @@ class ComparisonXBlock(XBlock):
         score = correct / len(self.data.get('questions')) * self.weight
         self.publish_grade(score)
         return {
-            'result': 'success'
+            'result': 'success',
+            'attempts_used': self.attempts,
         }
 
     @XBlock.json_handler
@@ -262,6 +264,12 @@ class ComparisonXBlock(XBlock):
         added on the LMS/Studio, return if the submission is past its due date.
         """
         return self.has_deadline_passed() if hasattr(self, 'has_deadline_passed') else False
+
+    def is_attempted(self) -> bool:
+        """
+        Has the problem been attempted?
+        """
+        return bool(self.attempts)
 
     # TO-DO: change this to create the scenarios you'd like to see in the
     # workbench while developing your XBlock.
