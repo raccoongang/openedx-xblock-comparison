@@ -129,10 +129,10 @@ function ComparisonXBlock(runtime, element, params) {
       url: handlerSubmitUrl,
       data: JSON.stringify({answers: answers}),
       dataType: 'json',
-      success: function (response) {
-        that.setAttribute('disabled', 'true')
+      success: function(data) {
+        $('.comparison_block', element).data('attempts-used', data.attempts_used);
+        $submitButton.attr('disabled', true);
         showMessage();
-        setTimeout(hideMessage, 5000);
       }
     })
   })
