@@ -215,11 +215,12 @@ class ComparisonXBlock(XBlock):
         self.publish_grade(score)
         return {
             'result': 'success',
+            'answers': self.user_answers,
             'attempts_used': self.attempts,
         }
 
     @XBlock.json_handler
-    def get_answer(self, *args, **kwargs):
+    def get_answers(self, *args, **kwargs):
         return {'answers': self.user_answers}
 
     def publish_grade(self, score):
