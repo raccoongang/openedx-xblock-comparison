@@ -83,7 +83,7 @@
   {% endif %}
 
   <div class="submit-attempt-container">
-    <button type="button" class="submit btn-brand" data-submitting="{% trans 'Submitting' %}" data-value="{% trans 'Submit' %}" disabled="disabled">
+    <button type="button" class="submit btn-brand" data-submitting="{% trans 'Submitting' %}" data-value="{% trans 'Submit' %}" disabled="disabled" data-user-id="{{ xblock.scope_ids.user_id }}">
       <span class="submit-label">{% trans "Submit answer" %}</span>
     </button>
   </div>

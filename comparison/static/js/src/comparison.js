@@ -4,15 +4,16 @@ function ComparisonXBlock(runtime, element, params) {
     currentLanguage = $('html').attr('lang');
   let upperCaseAlp = currentLanguage === 'uk' ? 'АБВГДЕЖИКЛМНПРСТУФХЦШЩЮЯ' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     handlerSubmitUrl = runtime.handlerUrl(element, 'submit_problem'),
-    handlerAnswerUrl = runtime.handlerUrl(element, 'get_answer'),
+    handlerAnswersUrl = runtime.handlerUrl(element, 'get_answers'),
     isPastDue = params.has_deadline_passed,
     $answers = $('.js-answer', element),
     $dropdownItemBlank = $('.dropdown--item_blank', element),
     $submitButton = $('.submit', element),
-    $submitLabel = $('.submit-label', element),
     $notification = $('.notification'),
     $notificationMessage = $('.js-notification-message', element),
-    gettext;
+    gettext,
+    uniqueSubmissionKey = `${$submitButton.data('user-id')}:${handlerSubmitUrl}`,
+    savedAnswers = null;
 
   if ('СomparisonXBlockI18N' in window) {
     // Use Сomparison's local translations
@@ -33,13 +34,14 @@ function ComparisonXBlock(runtime, element, params) {
 
     $.ajax({
       type: 'POST',
-      url: handlerAnswerUrl,
+      url: handlerAnswersUrl,
       data: JSON.stringify({
         requested: true
       }),
       dataType: 'json',
       success: function(data) {
-        fillAnswers(data.answers);
+        savedAnswers = data.answers;
+        fillAnswers(savedAnswers);
       }
     });
   };
@@ -67,19 +69,59 @@ function ComparisonXBlock(runtime, element, params) {
     $answer.remove();
   };
 
-  let checkAvailabilitySubmit = function() {
-    let $answers = $('.dropdown-list_questions .js-answer', element);
-    $submitButton.attr('disabled', isPastDue || $dropdownItemBlank.length !== $answers.length);
+  const checkAvailabilitySubmit = function() {
+    const $answers = $('.dropdown-list_questions .js-answer', element),
+          areAnswersComplete = !isPastDue && $dropdownItemBlank.length === $answers.length;
+    $submitButton.attr('disabled', true);
+
+    if (areAnswersComplete) {
+      const payload = getPayloadToSubmit(),
+            currentAnswers = payload.answers,
+            areSavedAnswers = !!savedAnswers.length && savedAnswers.every(function(item, i) {
+              return item.question_uid === currentAnswers[i].question_uid && item.answer_uid === currentAnswers[i].answer_uid;
+            });
+      if (!areSavedAnswers) {
+        $submitButton.attr('disabled', false);
+        sessionStorage.setItem(uniqueSubmissionKey, JSON.stringify(payload));
+      }
+    }
+  };
+
+  const getPayloadToSubmit = function() {
+    let answers = [];
+
+    _.each($dropdownItemBlank, function(el) {
+      let questionUid = $(el).data('question-uid'),
+          answerUid = $('.js-answer', el).data('answer-uid');
+      answers.push({
+        question_uid: questionUid,
+        answer_uid: answerUid
+      });
+    });
+    return {answers: answers};
+  };
+
+  const submit = function(payload, successCallback) {
+    $.ajax({
+      type: 'POST',
+      url: handlerSubmitUrl,
+      data: JSON.stringify(payload),
+      dataType: 'json',
+      success: successCallback
+    })
+  };
+
+  const postSubmit = function(data) {
+    $('.comparison_block', element).data('attempts-used', data.attempts_used);
+    $submitButton.attr('disabled', true);
+    savedAnswers = data.answers;
+    sessionStorage.removeItem(uniqueSubmissionKey);
+    showMessage();
   };
 
   let showMessage = function() {
     $notification.removeClass('is-hidden');
     $notificationMessage.text(gettext('Your response has been sent successfully.'));
-  };
-
-  let hideMessage = function() {
-    $notification.addClass('is-hidden');
-    $notificationMessage.text('');
   };
 
   render();
@@ -118,36 +160,12 @@ function ComparisonXBlock(runtime, element, params) {
 
   $('.dropdown-list_questions', element).on('click', '.js-remove-answer', function(ev) {
     removeAnswer($(ev.currentTarget).parent('.js-answer'));
+    sessionStorage.removeItem(uniqueSubmissionKey);
     checkAvailabilitySubmit();
   });
 
   $submitButton.on('click', function() {
-    let answers = [],
-      that = this;
-
-    if (isPastDue) {
-      return
-    }
-
-    _.each($dropdownItemBlank, function(el) {
-      let questionUid = $(el).data('question-uid'),
-          answerUid = $('.js-answer', el).data('answer-uid');
-      answers.push({
-        question_uid: questionUid,
-        answer_uid: answerUid
-      })
-    });
-
-    $.ajax({
-      type: 'POST',
-      url: handlerSubmitUrl,
-      data: JSON.stringify({answers: answers}),
-      dataType: 'json',
-      success: function(data) {
-        $('.comparison_block', element).data('attempts-used', data.attempts_used);
-        $submitButton.attr('disabled', true);
-        showMessage();
-      }
-    })
+    let payload = getPayloadToSubmit();
+    submit(payload, postSubmit);
   })
 }
