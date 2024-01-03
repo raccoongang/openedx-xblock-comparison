@@ -11,6 +11,7 @@ from xblock.core import XBlock
 from xblock.exceptions import JsonHandlerError
 from xblock.fields import Float, Dict, Integer, List, Scope, String
 from xblockutils.resources import ResourceLoader
+from xmodule.block_titling import TitledXBlockMixin
 
 from .default_data import DEFAULT_DATA
 from .utils import _
@@ -20,7 +21,7 @@ loader = ResourceLoader(__name__)
 
 
 @XBlock.needs('i18n')
-class ComparisonXBlock(XBlock):
+class ComparisonXBlock(XBlock, TitledXBlockMixin):
 
     DISPLAY_OPTION_MIN = 'min'
     DISPLAY_OPTION_MIDDLE = 'middle'
@@ -31,12 +32,6 @@ class ComparisonXBlock(XBlock):
         help=_('The display name for this comparison problem.'),
         scope=Scope.settings,
         default=_('Comparison'),
-    )
-    title = String(
-        display_name=_('Title'),
-        help=_('The title of the comparison problem. The title is displayed to learners.'),
-        scope=Scope.settings,
-        default='',
     )
     weight = Float(
         display_name=_('Problem Weight'),
@@ -173,7 +168,6 @@ class ComparisonXBlock(XBlock):
         Handles studio save.
         """
         self.display_name = submissions['display_name']
-        self.title = submissions['title']
         self.weight = float(submissions['weight'])
         self.display_option = submissions['display_option']
         self.data = submissions['data']

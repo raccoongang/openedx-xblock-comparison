@@ -1,9 +1,7 @@
 {% load i18n %}
 
 <div class="comparison_block" data-attempts-used="{{ attempts_used }}">
-  {% if xblock.title %}
-  <h2>{{ xblock.title }}</h2>
-  {% endif %}
+  <h3 class='hd hd-3 block-header'>{{ xblock.title_with_default }}</h3>
 
   {% if xblock.display_option == xblock.DISPLAY_OPTION_MIN %}
   <div class="dropdown display-option-min">
