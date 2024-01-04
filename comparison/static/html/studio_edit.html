@@ -75,6 +75,20 @@
         </li>
         <li class="field comp-setting-entry metadata_entry">
           <div class="wrapper-comp-setting">
+            <label class="label setting-label" for="xb-field-edit-title">
+                {% trans fields.title.display_name %}
+            </label>
+            <input
+              type="text"
+              class="field-data-control"
+              id="xb-field-edit-title"
+              value="{{ self.title }}"
+            >
+          </div>
+          <span class="tip setting-help">{% trans  fields.title.help %}</span>
+        </li>
+        <li class="field comp-setting-entry metadata_entry">
+          <div class="wrapper-comp-setting">
             <label class="label setting-label" for="xb-field-edit-weight">
                 {% trans fields.weight.display_name %}
             </label>

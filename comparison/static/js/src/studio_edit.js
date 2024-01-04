@@ -7,6 +7,7 @@ function ComparisonStudioEditXBlock(runtime, element, params) {
       answers = params.data.answers,
       handlerStudioSubmitUrl = runtime.handlerUrl(element, 'studio_submit'),
       $displayNameField = $('#xb-field-edit-display-name', element),
+      $titleField = $('#xb-field-edit-title', element),
       $weightField = $('#xb-field-edit-weight', element),
       $displayOptionField = $('#xb-field-edit-display-option', element),
       $questionsTab = $('.questions-tab', element),
@@ -209,6 +210,7 @@ function ComparisonStudioEditXBlock(runtime, element, params) {
       runtime.notify('save', {state: 'start', message: gettext('Saving')});
       let data = {
         display_name: $displayNameField.val(),
+        title: $titleField.val(),
         weight: $weightField.val(),
         display_option: $displayOptionField.val(),
         data: {
